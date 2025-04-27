@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TODO(JS)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body onload="loadData()">
+    <div class="input-area">
+        <div class="flex">
+           <div class="input-flex"> 
+            <input id="add-text" placeholder="TODOを入力" 　 />
+        </div>
+        <div class="add-flex">
+            <button id="add-button">追加</button>
+        </div>
+      </div>
+    </div>
+    <div class="incomplete-area">
+      <p class="title">未完了のTODO</p>
+      <ul id="notcomplete-list"></ul>
+    </div>
+    <div class="complete-area">
+      <p class="title">完了のTODO</p>
+      <ul id="complete-list"></ul>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
+
+<script>
+    /* TODO管理アプリ。スマホで必ず見てください。
+       以下のような機能が使えます。
+       ・TODOの追加
+       ・未完了のTODO
+       ・未完了TODOの完了・削除
+       ・完了のTODOを未完了に戻す */
+    
+    // オブジェクトの定義
+    let obj = {
+        notCompleteTodo: [],   // 未完了TODOのリスト
+        completeTodo: [],      // 完了TODOのリスト
+    };
+
+    let notCompleteList = document.getElementById("notcomplete-list");
+    let completeList = document.getElementById("complete-list");
+
+    // 追加ボタンイベント
+    // 追加ボタンが押されたら、入力されたTODOを取得
+    let incomplete = () => {
+        let inputText = document.getElementById("add-text").value;
+        if (inputText == "") {
+            return;
+        }
+
+        document.getElementById("add-text").value = "";  // 空文字にする
+        obj.notCompleteTodo.push(inputText);   // 未完了のリストに追加
+        addNotCompleteList();                  // 未完了リストに追加する関数を呼び出す
+    }
+
+    // 未完了リスト追加
+    function addNotCompleteList() {
+        notCompleteList.innerHTML = "";               
+
+        obj.notCompleteTodo.forEach((item, index) => {         
+            let div = document.createElement("div");               //未完了TODOにdiv要素追加
+            div.className = "flex" ;                               //divのクラス名flex
+            let li = document.createElement("li");                 //未完了TODOにli要素追加
+            li.className = "li";
+            li.textContent = item;  
+            let completeButton = document.createElement("button"); // 未完了TODOに完了ボタン追加
+            completeButton.className = "button";
+            completeButton.textContent = "完了";
+            let deleteButton = document.createElement("button");   // 未完了TODOに削除ボタン追加
+            deleteButton.className = "button";
+            deleteButton.textContent = "削除";
+
+            // 親子関係を定義
+            div.appendChild(li);
+            div.appendChild(completeButton);
+            div.appendChild(deleteButton);
+            notCompleteList.appendChild(div);
+
+            // 完了ボタンイベント
+            completeButton.addEventListener("click", function() {completeButtonEvent(index, item)});
+            // 削除ボタンリセット
+            deleteButton.addEventListener("click", function() {notDeleteButtonEvent(index)});
+        });
+        saveData();  // 保存
+    }
+
+    // 完了ボタンイベント
+    // 完了ボタンが押されたら、未完了TODOリストから削除・完了TODOリストに追加
+    let completeButtonEvent = (index, item) => {
+        obj.completeTodo.push(item);             // 完了リストに追加
+        obj.notCompleteTodo.splice(index, 1);    // 未完了リストから削除
+        addNotCompleteList();                    // 未完了リストを更新する関数を呼び出す
+        addCompleteList();                       // 完了リストに追加する関数を呼び出す
+    }
+
+    // 未完了の削除ボタンイベント
+    // 削除ボタンが押されたら、未完了TODOリストから削除
+    let notDeleteButtonEvent = (index) => {
+        obj.notCompleteTodo.splice(index, 1);   // 未完了TODOリストから削除
+        addNotCompleteList();                   // 未完了リスト更新
+    }
+
+    // 完了の削除ボタンイベント
+    // 削除ボタンが押されたら、未完了TODOリストから削除
+    let deleteButtonEvent = (index) => {
+        obj.completeTodo.splice(index, 1);   // 未完了TODOリストから削除
+        addCompleteList();                   // 未完了リスト更新
+    }
+
+    // 完了リスト追加
+    function addCompleteList() {
+        completeList.innerHTML = "";                              // 完了のTODOの部分を初期化
+
+        obj.completeTodo.forEach((item, index) => {       
+            let div = document.createElement("div");              // 未完了TODOにdiv要素追加
+            div.className = "flex" ;                              // divのクラス名flex
+            let li = document.createElement("li");                // 未完了TODOにli要素追加
+            li.className = "li";
+            li.textContent = item;  
+            let removeButton = document.createElement("button");  // 未完了TODOに戻すボタン追加
+            removeButton.className = "button";
+            removeButton.textContent = "戻す";
+            let deleteButton = document.createElement("button");   // 未完了TODOに削除ボタン追加
+            deleteButton.className = "button";
+            deleteButton.textContent = "削除";
+
+            // 親子関係を定義
+            div.appendChild(li);
+            div.appendChild(removeButton);
+            div.appendChild(deleteButton);
+            completeList.appendChild(div);
+
+            // 戻すボタンイベント
+            removeButton.addEventListener("click", function() {removeButtonEvent(index, item)});
+            // 削除ボタンリセット
+            deleteButton.addEventListener("click", function() {deleteButtonEvent(index)});
+        });
+        saveData();
+    }
+
+
+    // 戻るボタンイベント
+    let removeButtonEvent = (index, item) => {
+        obj.notCompleteTodo.push(item);       //未完了リストに追加
+        obj.completeTodo.splice(index, 1);    //完了リストから削除
+
+        addNotCompleteList();
+        addCompleteList();
+    }
+
+
+    function saveData() {
+            // オブジェクトをJSONに変換し、notCompleteTodoという名前でlocalStorageに保存
+            localStorage.setItem("notCompleteTodo", JSON.stringify(obj.notCompleteTodo)); 
+            // オブジェクトをJSONに変換し、completeTodoという名前でlocalStorageに保存
+            localStorage.setItem("completeTodo", JSON.stringify(obj.completeTodo)); 
+        }
+
+    function loadData() {
+            // localStorageからtodoという名前のデータを取り出し保存
+            let notComplete = localStorage.getItem("notCompleteTodo"); 
+            // 三項演算子という書き方(if文の代替)。dataに値があればJSONをオブジェクトに変換してobj.todoに代入、値がなければ[]を代入。
+            obj.notCompleteTodo = notComplete ? JSON.parse(notComplete) : []; 
+
+            // localStorageからtodoという名前のデータを取り出し保存
+            let complete = localStorage.getItem("completeTodo"); 
+            // 三項演算子という書き方(if文の代替)。dataに値があればJSONをオブジェクトに変換してobj.todoに代入、値がなければ[]を代入。
+            obj.completeTodo = complete ? JSON.parse(complete) : []; 
+            addNotCompleteList();
+            addCompleteList();
+        }
+
+    // 追加ボタンが押されたら、追加ボタンイベントの関数を呼び出す
+    document.getElementById("add-button").addEventListener("click", incomplete);  
+</script>
+
+<style>
+    body {
+    font-size: 5vw;
+    font-family: sans-serif;
+    color: #666;
+    }
+
+    input::placeholder {
+     font-size: 4vw;
+    }
+
+     .flex {
+        display: flex;
+    }
+
+    .input-flex {
+        flex: 2;
+    }
+
+    .add-flex {
+        flex: 1;
+        padding-top: 13px;
+    }
+
+    .button {
+        font-size: 4.5vw;
+        padding: 1vw 5vw;
+    }
+
+    .input-area {
+        background-color: #d1e8ff;
+    }
+
+    input {
+    border-radius: 8px;
+    border: none;
+    width: 80%;
+    border-radius: 8px;
+    border: none;
+    padding: 3vw 4vw;
+    margin-bottom: 2.5vw;
+    font-size: 4.5vw;
+    }
+
+    button {
+    font-size: 5vw;
+    border-radius: 8px;
+    border: 3px solid #b0c4de;
+    background-color: white;
+    padding: 1vw 5vw;
+    margin: 1vw 1vw 1vw 4vw;
+    font-size: 4.5vw;
+    color: black;
+    }
+
+    button:hover {
+    background-color: #4682b4;
+    color: #fff;
+    cursor: pointer;
+    }
+
+    .input-area {
+    background-color: #e5f2ff;
+    width: 90%;
+    margin: 8px auto;
+    height: 115px;
+    padding: 8px;
+    border-radius: 8px;
+    }
+
+    .incomplete-area {
+    border: 2px solid #7fbfff;
+    width: 90%;
+    margin: 8px auto;
+    height: 40vh;
+    padding: 8px;
+
+    border-radius: 8px;
+    }
+
+    .complete-area {
+    border: 2px solid #7fbfff;
+    width: 90%;
+    margin: 8px auto;
+    min-height: 40vh;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #e5f2ff;
+    }
+
+    .title {
+    text-align: center;
+    margin-top: 0;
+    font-weight: bold;
+    }
+
+    .list-row {
+    display: flex;
+    align-items: center;
+    }
+
+    .todo-item {
+    margin: 6px;
+    }
+
+    .li {
+        margin-top: 3px;
+        flex: 3;
+        margin-left: 25px;
+    }
+
+    .button {
+        flex: 1;
+    }
+</style>
