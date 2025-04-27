@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Winter Wonders</title>
+    <meta name="description" content="*" />
+    <!--favicon-->
+    <link rel="icon" href="*" />
+    <!--スマホでも正常に閲覧できるように-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- CSS -->
+    <!--resetCSS-->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+    <!--ネットがつながらない環境で作業するときは、↓を使う事-->
+    <!--<link href="ress.css" rel="stylesheet">-->
+    <!--こちらのリセットcss使用する際は、上のリセットCSSをコメントアウトすること-->
+    <!--リセットcssのファイルのパスを要確認すること-->
+
+    <!--webfont-->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"> -->
+    <!--css-->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- headerここから -->
+    <header>
+      <button id="menuButton" type="button" class="menu-button">
+        <span class="menu-button__line"></span>
+      </button>
+      <nav class="menu-inner">
+        <ul>
+          <li><a href="#gaiyo" class="ccc">概要</a></li>
+          <li><a href="#keshiki" class="ccc">世界の景色</a></li>
+          <li><a href="#tenji" class="ccc">写真展示</a></li>
+        </ul>
+      </nav>
+      <div id="hamburger">
+        <span></span>
+      </div>
+    </header>
+    <!-- headerここまで -->
+
+    <!-- mainここから -->
+    <main>
+      <div class="flex">
+        <div class="flex-item1">
+          <div class="icon">
+            <img src="img/icon.png" alt="アイコン" />
+          </div>
+          <div class="center">
+            <li><a href="#gaiyo">概要</a></li>
+            <li><a href="#keshiki">世界の景色</a></li>
+            <li><a href="#tenji">写真展示</a></li>
+          </div>
+          <div class="redbo">
+            <img src="img/redbo.jpg" alt="赤い棒" />
+          </div>
+        </div>
+        <div class="flex-item2">
+          <!-- ヒーローイメージここから -->
+          <div class="hero-img">
+            <div class="hero-img-text">
+              <p>冬に訪れたい世界の名所</p>
+              <h1>Winter Wonders</h1>
+            </div>
+          </div>
+          <!-- ヒーローイメージここまで -->
+        </div>
+      </div>
+
+      <div id="gaiyo" class="flex1">
+        <div class="flex-item3">
+          <div class="img1"></div>
+          <div class="img2"></div>
+        </div>
+        <div class="wrapper1">
+          <div class="flex-item4">
+            <div class="gaiyo">
+              <h2 class="sekaigaiyo">世界の名所についての概要</h2>
+              <!-- <div class="maru">
+                <img src="img/red.jpg" alt="赤丸"> -->
+              <!-- </div> -->
+            </div>
+
+            <div class="p">
+              <p>
+                冬が訪れると、世界の名所は幻想的な輝きを放ちます。<br />
+                ヨーロッパのクリスマスマーケット、北欧のオーロラ、
+                カナダの氷河、日本の白川郷、南極の壮大な風景…。<br />
+                寒さが生み出す特別な景色を求めて、この冬、旅に出て みませんか？
+              </p>
+            </div>
+            <div class="button">
+              <button>
+                <a href="https://ontrip.jal.co.jp/eur/17578507" target="_blank"
+                  >もっとくわしく</a
+                >
+              </button>
+            </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- グリッドここから -->
+      <div class="wrapper">
+        <h2 id="keshiki">scenery of the world</h2>
+        <div class="grid">
+          <div class="world-grid img-grid1">
+            <div class="flex2">
+              <div class="flex-img-grid">
+                <img
+                  src="img/redmaru.jpg"
+                  alt="小さい赤丸"
+                  width="30"
+                  height="30"
+                />
+              </div>
+              <div class="flex-h3">
+                <h3>Iceland</h3>
+              </div>
+            </div>
+            <h4>アイスランド</h4>
+            <div class="honbun">
+              <p>
+                太陽光のうち青色のみの氷を透過する光で作られる、
+                "スーパーブル"の世界が広がる「氷の洞窟」。
+              </p>
+            </div>
+          </div>
+          <div class="world-grid img-grid2">
+            <div class="flex2">
+              <div class="flex-img-grid">
+                <img src="img/redmaru.jpg" alt="赤丸" />
+              </div>
+              <div class="flex-h3">
+                <h3>Finland</h3>
+              </div>
+            </div>
+            <h4>フィンランド</h4>
+            <div class="honbun">
+              <p>ノスタルジックな気分に浸れる「サンタクロース村」。</p>
+            </div>
+          </div>
+          <div class="world-grid img-grid3">
+            <div class="flex2">
+              <div class="flex-img-grid">
+                <img src="img/redmaru.jpg" alt="赤丸" />
+              </div>
+              <div class="flex-h3">
+                <h3>Germany</h3>
+              </div>
+            </div>
+            <h4>ドイツ</h4>
+            <div class="honbun">
+              <p>
+                世界最大の、都市ごとの違いも楽しい「クリスマスマーケット」。
+              </p>
+            </div>
+          </div>
+          <div class="world-grid img-grid4">
+            <div class="flex2">
+              <div class="flex-img-grid">
+                <img src="img/redmaru.jpg" alt="赤丸" />
+              </div>
+              <div class="flex-h3">
+                <h3>Taiwan</h3>
+              </div>
+            </div>
+            <h4>台湾</h4>
+            <div class="honbun">
+              <p>
+                レトロで温かみのある、
+                冬の夜空をあたたかく灯す「ランタンフェスティバル」。
+              </p>
+            </div>
+          </div>
+          <div class="world-grid img-grid5">
+            <div class="flex2">
+              <div class="flex-img-grid">
+                <img src="img/redmaru.jpg" alt="赤丸" />
+              </div>
+              <div class="flex-h3">
+                <h3>Sweden</h3>
+              </div>
+            </div>
+            <h4>スウェーデン</h4>
+            <div class="honbun">
+              <p>
+                ３６０度視界が開けた雪山で、神秘的な光が空を覆う「オーロラ」。
+              </p>
+            </div>
+          </div>
+          <div class="world-grid img-grid6">
+            <div class="flex2">
+              <div class="flex-img-grid">
+                <img src="img/redmaru.jpg" alt="赤丸" />
+              </div>
+              <div class="flex-h3">
+                <h3>England</h3>
+              </div>
+            </div>
+            <h4>イギリス</h4>
+            <div class="honbun">
+              <p>
+                ワクワクとしたクリスマスムードと、
+                その煌めきに大人も童心にかえる「ウィンターワンダーランド」。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="tenji">photo gallery</h2>
+        <div class="grid2">
+          <div class="grid2-big">
+            <img src="img/gazo2.jpg" alt="冬の画像１" />
+          </div>
+          <div class="grid-item">
+            <img src="img/gazo1.jpg" alt="冬の画像２" />
+          </div>
+          <div class="grid-item">
+            <img src="img/gazo4.jpg" alt="冬の画像３" />
+          </div>
+          <div class="grid-item">
+            <img src="img/gazo5.jpg" alt="冬の画像４" />
+          </div>
+          <div class="grid-item">
+            <img src="img/gazo6.jpg" alt="冬の画像５" />
+          </div>
+          <div class="grid2-big2">
+            <img src="img/gazo3.jpg" alt="冬の画像６" />
+          </div>
+        </div>
+      </div>
+
+      <!-- グリッドここまで -->
+    </main>
+    <!-- mainここまで -->
+
+    <!-- footerここから -->
+    <footer>
+      <small>Ito Shinjon</small>
+    </footer>
+    <!-- footerここまで -->
+
+    <!--中身ここまで-->
+
+    <!--jquery本体-->
+
+    <!--jquery本体ここまで-->
+
+    <!--jqueryプログラムコード-->
+
+    <!--jqueryプログラムコードここまで-->
+
+    <script>
+      // ハンバーガーメニューの要素を取得
+      const menuButton = document.querySelector(".menu-button");
+      // メニューの要素を取得
+      const menuInner = document.querySelector(".menu-inner");
+
+      // ハンバーガーメニューがクリックされたら
+      // / メニューが初めて非表示に設定されるように
+      menuInner.style.display = "none";
+
+      // ハンバーガーメニューがクリックされた時の処理
+      menuButton.addEventListener("click", function () {
+        // メニューが表示されていなければ表示、表示されていれば非表示にする
+        if (
+          menuInner.style.display === "none" ||
+          menuInner.style.display === ""
+        ) {
+          menuInner.style.display = "block";
+        } else {
+          menuInner.style.display = "none";
+        }
+      });
+
+      let isMenuOpened = false;
+
+      function toggleMenu() {
+        isMenuOpened = !isMenuOpened;
+        if (isMenuOpened) {
+          // メニューを開いた時の処理
+          menuButton.classList.add("is-opened");
+        } else {
+          // メニューを閉じた時の処理
+          menuButton.classList.remove("is-opened");
+        }
+      }
+
+      menuButton.addEventListener("click", toggleMenu);
+    </script>
+  </body>
+</html>
